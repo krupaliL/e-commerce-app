@@ -1,0 +1,13 @@
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#272727"
+  image: assets/logos/e-shop-splash-logo.png
+#  image_dark: assets/logos/facebook-icon.png
+
+  android_12:
+    color: "#FFFFFF"
+    color_dark: "#272727"
+    image: assets/logos/e-shop-splash-logo.png
+#    image_dark: assets/logos/facebook-icon.png
+
+  web: false
