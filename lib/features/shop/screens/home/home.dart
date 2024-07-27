@@ -1,14 +1,15 @@
+import 'package:e_commerce_app/common/widgets/products/product_cards/product_card_vertical.dart';
 import 'package:e_commerce_app/features/shop/screens/home/widgets/home_appbar.dart';
+import 'package:e_commerce_app/features/shop/screens/home/widgets/home_categories.dart';
+import 'package:e_commerce_app/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:e_commerce_app/utils/constants/sizes.dart';
-import 'package:e_commerce_app/utils/device/device_utility.dart';
-import 'package:e_commerce_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
 
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
+import '../../../../common/widgets/layouts/grid_layout.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -24,6 +25,7 @@ class HomeScreen extends StatelessWidget {
             TPrimaryHeaderContainer(
               child: Column(
                 children: [
+
                   /// Appbar
                   THomeAppBar(),
                   SizedBox(height: TSizes.spaceBtwSections),
@@ -37,56 +39,42 @@ class HomeScreen extends StatelessWidget {
                     padding: EdgeInsets.only(left: TSizes.defaultSpace),
                     child: Column(
                       children: [
+
                         /// -- Heading
-                        TSectionHeading(title: 'Popular Categories', showActionButton: false, textColor: TColors.white),
+                        TSectionHeading(
+                            title: 'Popular Categories',
+                            showActionButton: false,
+                            textColor: TColors.white),
                         SizedBox(height: TSizes.spaceBtwItems),
 
                         /// -- Categories
-                        SizedBox(
-                          height: 80,
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 6,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (_, index) {
-                              return Padding(
-                                padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
-                                child: Column(
-                                  children: [
-                                    /// Circular Icon
-                                    Container(
-                                      width: 56,
-                                      height: 56,
-                                      padding: const EdgeInsets.all(TSizes.sm),
-                                      decoration: BoxDecoration(
-                                        color: TColors.white,
-                                        borderRadius: BorderRadius.circular(100),
-                                      ),
-                                      child: const Center(
-                                        child: Image(image: AssetImage(TImages.shoeIcon), fit: BoxFit.cover, color: TColors.dark),
-                                      ),
-                                    ),
-
-                                    /// Text
-                                    SizedBox(height: TSizes.spaceBtwItems / 2),
-                                    SizedBox(
-                                      width: 55,
-                                      child: Text(
-                                        'S',
-                                        style: Theme.of(context).textTheme.labelMedium!.apply(color: TColors.white),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                        THomeCategories(),
                       ],
                     ),
                   ),
+                ],
+              ),
+            ),
+
+            /// Body
+            Padding(
+              padding: EdgeInsets.all(TSizes.defaultSpace),
+              child: Column(
+                children: [
+                  /// Promo Slider
+                  TPromoSlider(banners: [
+                    TImages.promoBanner1,
+                    TImages.promoBanner2,
+                    TImages.promoBanner3
+                  ],),
+                  SizedBox(height: TSizes.spaceBtwSections),
+
+                  /// -- Heading
+                  TSectionHeading(title: 'Popular Products', onPressed: (){}),
+                  const SizedBox(height: TSizes.spaceBtwItems),
+
+                  /// Popular Products
+                  TGridLayout(itemCount: 2, itemBuilder: (_, index) => const TProductCardVertical()),
                 ],
               ),
             ),
