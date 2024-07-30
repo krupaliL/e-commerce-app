@@ -6,12 +6,12 @@ import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:e_commerce_app/utils/constants/sizes.dart';
 import 'package:e_commerce_app/utils/helpers/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../icons/t_circular_icon.dart';
 import '../../texts/product_price_text.dart';
 import '../../texts/product_title_text.dart';
+import '../../texts/t_brand_title_text_with_verified_icon.dart';
 
 class TProductCardVertical extends StatelessWidget {
   const TProductCardVertical({super.key});
@@ -73,20 +73,13 @@ class TProductCardVertical extends StatelessWidget {
 
             /// -- Details
             Padding(
-              padding: EdgeInsets.only(left: TSizes.sm),
+              padding: const EdgeInsets.only(left: TSizes.sm),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TProductTitleText(title: 'Navy Blue Shoes', smallSize: true),
+                  const TProductTitleText(title: 'Navy Blue Shoes', smallSize: true),
                   const SizedBox(height: TSizes.spaceBtwItems / 2),
-
-                  Row(
-                    children: [
-                      Text('Sorel', overflow: TextOverflow.ellipsis, maxLines: 1, style: Theme.of(context).textTheme.labelMedium),
-                      const SizedBox(width: TSizes.xs),
-                      const Icon(Iconsax.verify5, color: TColors.primary, size: TSizes.iconsXs),
-                    ],
-                  ),
+                  TBrandTitleWithVerifiedIcon(title: 'Sorel'),
                 ],
               ),
             ),
@@ -99,7 +92,7 @@ class TProductCardVertical extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 /// Price
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(left: TSizes.sm),
                   child: TProductPriceText(price: '35.0'),
                 ),

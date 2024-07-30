@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../../../common/widgets/custom_shapes/containers/rounded_container.dart';
 import '../../../../../common/widgets/images/t_rounded_image.dart';
 import '../../../../../utils/constants/colors.dart';
-import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
 import '../../../controllers/home_controller.dart';
 
