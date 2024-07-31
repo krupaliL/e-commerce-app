@@ -33,7 +33,6 @@ class TProductCardVertical extends StatelessWidget {
         ),
         child: Column(
           children: [
-
             /// Thumbnail, Wishlist Button, Discount Tag
             TRoundedContainer(
               height: 180,
@@ -41,7 +40,6 @@ class TProductCardVertical extends StatelessWidget {
               backgroundColor: dark ? TColors.dark : TColors.light,
               child: Stack(
                 children: [
-
                   /// -- Thumbnail Image
                   const TRoundedImage(
                     padding: EdgeInsets.only(top: TSizes.xl + 10),
@@ -72,15 +70,19 @@ class TProductCardVertical extends StatelessWidget {
             const SizedBox(height: TSizes.spaceBtwItems / 2),
 
             /// -- Details
-            Padding(
-              padding: const EdgeInsets.only(left: TSizes.sm),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const TProductTitleText(title: 'Navy Blue Shoes', smallSize: true),
-                  const SizedBox(height: TSizes.spaceBtwItems / 2),
-                  TBrandTitleWithVerifiedIcon(title: 'Sorel'),
-                ],
+            const Padding(
+              padding: EdgeInsets.only(left: TSizes.sm),
+              // Only reason to use the [SizedBox] here is to make Column full Width
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TProductTitleText(title: 'Navy Blue Shoes', smallSize: true),
+                    SizedBox(height: TSizes.spaceBtwItems / 2),
+                    TBrandTitleWithVerifiedIcon(title: 'Sorel'),
+                  ],
+                ),
               ),
             ),
 

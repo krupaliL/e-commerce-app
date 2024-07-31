@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
+import '../../../utils/helpers/helper_functions.dart';
 
 class TAppBar extends StatelessWidget implements PreferredSizeWidget {
   const TAppBar({
@@ -28,7 +30,7 @@ class TAppBar extends StatelessWidget implements PreferredSizeWidget {
       child: AppBar(
         automaticallyImplyLeading: false,
         leading: showBackArrow
-            ? IconButton(onPressed: () => Get.back(), icon: const Icon(Iconsax.arrow_left))
+            ? IconButton(onPressed: () => Get.back(), icon: const Icon(Iconsax.arrow_left), color: THelperFunctions.isDarkMode(context) ? TColors.white : TColors.black,)
             : leadingIcon != null ? IconButton(onPressed: leadingOnPressed, icon: Icon(leadingIcon)) : null,
         title: title,
         actions: actions,
