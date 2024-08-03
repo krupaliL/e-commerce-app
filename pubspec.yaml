@@ -32,6 +32,7 @@ dependencies:
   # Product Specific
   readmore: ^3.0.0
   carousel_slider: ^4.2.1
+  flutter_rating_bar: ^4.0.1
 
 
   #-------- ./ PACKAGES END --------#
@@ -50,11 +51,12 @@ flutter:
   assets:
     - assets/logos/
     - assets/icons/brands/
-    - assets/images/banners/
     - assets/icons/categories/
     - assets/images/animations/
+    - assets/images/banners/
     - assets/images/on_boarding_image/
     - assets/images/products/
+    - assets/images/reviews/
     - assets/images/user/
 
   #-------- LOCAL FONTS --------#
