@@ -43,6 +43,11 @@ class TImages {
   static const String userProfileImage2 = 'assets/images/reviews/reviews_profile_image_2.jpg';
   static const String userProfileImage3 = 'assets/images/reviews/reviews_profile_image_3.jpg';
 
+  // -- Payment Methods
+  static const String successfulPaymentIcon = "assets/icons/successful-payment-icon.png";
+
+  static const String paypal = 'assets/icons/payment_methods/paypal.png';
+
   // -- Profile
   static const String user = "assets/images/user/user.png";
 

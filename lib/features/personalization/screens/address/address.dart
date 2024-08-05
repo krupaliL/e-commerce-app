@@ -16,13 +16,13 @@ class UserAddressScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         backgroundColor: TColors.primary,
         onPressed: () => Get.to(() => const AddNewAddressScreen()),
-        child: Icon(Iconsax.add, color: Colors.white),
+        child: const Icon(Iconsax.add, color: Colors.white),
       ),
       appBar: TAppBar(
         showBackArrow: true,
         title: Text('Addresses', style: Theme.of(context).textTheme.headlineSmall),
       ),
-      body: SingleChildScrollView(
+      body: const SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(TSizes.defaultSpace),
           child: Column(
