@@ -4,6 +4,8 @@ import 'package:e_commerce_app/common/widgets/list_tiles/settings_menu_tile.dart
 import 'package:e_commerce_app/common/widgets/texts/section_heading.dart';
 import 'package:e_commerce_app/features/personalization/screens/address/address.dart';
 import 'package:e_commerce_app/features/personalization/screens/profile/profile.dart';
+import 'package:e_commerce_app/features/shop/screens/cart/cart.dart';
+import 'package:e_commerce_app/features/shop/screens/order/order.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
@@ -50,8 +52,18 @@ class SettingsScreen extends StatelessWidget {
                     subTitle: 'Set shopping delivery address',
                     onTap: () => Get.to(() => const UserAddressScreen()),
                   ),
-                  TSettingsMenuTile(icon: Iconsax.shopping_cart, title: 'My Cart', subTitle: 'Add, remove products and move to checkout', onTap: (){},),
-                  TSettingsMenuTile(icon: Iconsax.bag_tick, title: 'My Orders', subTitle: 'In-progress and Completed Orders', onTap: (){},),
+                  TSettingsMenuTile(
+                    icon: Iconsax.shopping_cart,
+                    title: 'My Cart',
+                    subTitle: 'Add, remove products and move to checkout',
+                    onTap: () => Get.to(() => const CartScreen()),
+                  ),
+                  TSettingsMenuTile(
+                    icon: Iconsax.bag_tick,
+                    title: 'My Orders',
+                    subTitle: 'In-progress and Completed Orders',
+                    onTap: () => Get.to(() => const OrderScreen()),
+                  ),
                   TSettingsMenuTile(icon: Iconsax.bank, title: 'Bank Account', subTitle: 'Withdraw balance to registered bank account', onTap: (){},),
                   TSettingsMenuTile(icon: Iconsax.discount_shape, title: 'My Coupons', subTitle: 'List of all the discounted coupons', onTap: (){},),
                   TSettingsMenuTile(icon: Iconsax.notification, title: 'Notifications', subTitle: 'Set any kind of notification message', onTap: (){},),
