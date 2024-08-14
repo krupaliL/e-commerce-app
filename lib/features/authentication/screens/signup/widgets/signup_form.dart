@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/features/authentication/controllers/signup/signup_controller.dart';
-import 'package:e_commerce_app/features/authentication/screens/signup/verify_email.dart';
 import 'package:e_commerce_app/features/authentication/screens/signup/widgets/terms_conditions_checkbox.dart';
 import 'package:e_commerce_app/utils/validators/validation.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,7 @@ class TSignupForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(SignupController());
     return Form(
-      key: controller.signupForKey,
+      key: controller.signupFormKey,
       child: Column(
         children: [
           /// First & Last Name
@@ -79,14 +78,19 @@ class TSignupForm extends StatelessWidget {
           const SizedBox(height: TSizes.spaceBtwInputFields),
 
           /// Password
-          TextFormField(
-            validator: (value) => TValidator.validatePassword(value),
-            controller: controller.password,
-            obscureText: true,
-            decoration: const InputDecoration(
-              labelText: TTexts.password,
-              prefixIcon: Icon(Iconsax.password_check),
-              suffixIcon: Icon(Iconsax.eye_slash),
+          Obx(
+            () => TextFormField(
+              validator: (value) => TValidator.validatePassword(value),
+              controller: controller.password,
+              obscureText: controller.hidePassword.value,
+              decoration: InputDecoration(
+                labelText: TTexts.password,
+                prefixIcon: const Icon(Iconsax.password_check),
+                suffixIcon: IconButton(
+                  onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
+                  icon: Icon(controller.hidePassword.value ? Iconsax.eye_slash : Iconsax.eye),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -99,7 +103,7 @@ class TSignupForm extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () => Get.to(() => controller.signup()),
+              onPressed: () => controller.signup(),
               child: const Text(TTexts.createAccount),
             ),
           ),

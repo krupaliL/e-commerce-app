@@ -58,6 +58,7 @@ class TImages {
   static const String nikeShoes1 = "assets/images/products/nike-shoes-1.png";
   static const String nikeShoes2 = "assets/images/products/nike-shoes-2.png";
 
-  // -- Loader
-  static const String doctorAnimation = "assets/doctor-animation.json";
+  // -- Lottie Animation
+  static const String doctorAnimation = "assets/images/animations/doctor-animation.json";
+  static const String successfullyRegisterAnimation = "assets/images/animations/successful-animation.json";
 }
