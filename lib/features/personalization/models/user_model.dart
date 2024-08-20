@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/utils/formatters/formatters.dart';
 
 /// Model class representing user data.
@@ -57,7 +58,6 @@ class UserModel {
     };
   }
 
-  /*
   /// Factory method to create a UserModel from a Firebase document snapshot.
   factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
@@ -71,8 +71,8 @@ class UserModel {
         phoneNumber: data['PhoneNumber'] ?? '',
         profilePicture: data['ProfilePicture'] ?? '',
       );
+    } else {
+      return UserModel.empty();
     }
-    return ;
   }
-  */
 }

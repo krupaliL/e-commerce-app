@@ -1,3 +1,4 @@
+import 'package:e_commerce_app/data/repositories/user/user_repository.dart';
 import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
 import 'package:e_commerce_app/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:e_commerce_app/features/authentication/screens/signup/verify_email.dart';
@@ -17,6 +18,9 @@ class AuthenticationRepository extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
+  /// Get Authenticated User Data
+  User? get authUser => _auth.currentUser;
+
   /// Called from main.dart on app launch
   @override
   void onReady() {
@@ -27,7 +31,7 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// Function to determine the Relevant Screen and redirect accordingly.
-  screenRedirect() async {
+  void screenRedirect() async {
     final user = _auth.currentUser;
 
     if(user != null){
@@ -102,10 +106,31 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
-  /// [EmailVerification] - FORGET PASSWORD
+  /// [EmailAuthentication] - FORGET PASSWORD
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw e.toString();
+    } on FirebaseException catch (e) {
+      throw e.toString();
+    } on FormatException catch (e) {
+      throw e.toString();
+    } on PlatformException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  /// [ReAuthentication] - RE AUTHENTICATION USER
+  Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
+    try {
+      // Create a credential
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
+
+      // ReAuthenticate
+      await _auth.currentUser!.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw e.toString();
     } on FirebaseException catch (e) {
@@ -170,4 +195,21 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  /// DELETE USER - Remove user Auth and Firestore Account.
+  Future<void> deleteAccount() async {
+    try {
+      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      await _auth.currentUser?.delete();
+    } on FirebaseAuthException catch (e) {
+      throw e.toString();
+    } on FirebaseException catch (e) {
+      throw e.toString();
+    } on FormatException catch (e) {
+      throw e.toString();
+    } on PlatformException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 }
