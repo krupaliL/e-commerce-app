@@ -26,13 +26,17 @@ class AuthenticationRepository extends GetxController {
     screenRedirect();
   }
 
-  /// Function to Show Relevant Screen
+  /// Function to determine the Relevant Screen and redirect accordingly.
   screenRedirect() async {
     final user = _auth.currentUser;
+
     if(user != null){
+      // If the user is logged in
       if(user.emailVerified){
+        // If the user's email is verified, navigate to the main Navigation Menu
         Get.offAll(() => const NavigationMenu());
       } else{
+        // If the user's email is not verified, navigate to the VerifyEmailScreen
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
       }
     } else{
@@ -98,8 +102,25 @@ class AuthenticationRepository extends GetxController {
     }
   }
 
+  /// [EmailVerification] - FORGET PASSWORD
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw e.toString();
+    } on FirebaseException catch (e) {
+      throw e.toString();
+    } on FormatException catch (e) {
+      throw e.toString();
+    } on PlatformException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
 /* ----------------------------- Federated identity & social sign-in -----------------------------*/
-  /// [GoogleAuthentication] - MAIL VERIFICATION
+  /// [GoogleAuthentication] - GOOGLE
   Future<UserCredential?> signInWithGoogle() async {
     try {
       // Trigger the authentication flow
