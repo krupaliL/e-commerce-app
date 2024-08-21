@@ -1,7 +1,12 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_app/data/repositories/authentication/authentication_repository.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../features/personalization/models/user_model.dart';
 
@@ -22,6 +27,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'saveUserRecord');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -42,6 +48,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'fetchUserDetails');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -57,6 +64,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'updateUserDetails');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -72,6 +80,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'updateSingleField');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -87,6 +96,26 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'removeUserRecord');
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  /// Upload any Image
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+    } on FirebaseException catch (e) {
+      throw e.toString();
+    } on FormatException catch (e) {
+      throw e.toString();
+    } on PlatformException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      log(e.toString(), name: 'removeUserRecord');
       throw 'Something went wrong. Please try again';
     }
   }

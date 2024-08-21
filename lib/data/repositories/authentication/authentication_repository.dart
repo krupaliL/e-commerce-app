@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:e_commerce_app/data/repositories/user/user_repository.dart';
 import 'package:e_commerce_app/features/authentication/screens/login/login.dart';
 import 'package:e_commerce_app/features/authentication/screens/onboarding/onboarding.dart';
@@ -68,6 +70,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'loginWithEmailAndPassword');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -85,6 +88,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'registerWithEmailAndPassword');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -102,6 +106,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'sendEmailVerification');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -119,6 +124,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'sendPasswordResetEmail');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -140,6 +146,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'reAuthenticateWithEmailAndPassword');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -169,6 +176,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'signInWithGoogle');
       if (kDebugMode) print('Something went wrong: $e');
       return null;
     }
@@ -191,6 +199,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'logout');
       throw 'Something went wrong. Please try again';
     }
   }
@@ -198,17 +207,23 @@ class AuthenticationRepository extends GetxController {
   /// DELETE USER - Remove user Auth and Firestore Account.
   Future<void> deleteAccount() async {
     try {
-      await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
+      final userRepository = Get.put(UserRepository());
+      await userRepository.removeUserRecord(_auth.currentUser!.uid);
       await _auth.currentUser?.delete();
     } on FirebaseAuthException catch (e) {
+      log(e.toString(), name: 'FirebaseAuthException');
       throw e.toString();
     } on FirebaseException catch (e) {
+      log(e.toString(), name: 'FirebaseException');
       throw e.toString();
     } on FormatException catch (e) {
+      log(e.toString(), name: 'FormatException');
       throw e.toString();
     } on PlatformException catch (e) {
+      log(e.toString(), name: 'PlatformException');
       throw e.toString();
     } catch (e) {
+      log(e.toString(), name: 'deleteAccount');
       throw 'Something went wrong. Please try again';
     }
   }
