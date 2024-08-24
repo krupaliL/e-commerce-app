@@ -2,6 +2,8 @@
 /// LIST OF ENUMS
 /// They cannot be creaed inside a class
 
+enum ProductType { single, variable }
+
 enum TextSizes { small, medium, large }
 
 enum OrderStatus { processing, shipped, delivered }

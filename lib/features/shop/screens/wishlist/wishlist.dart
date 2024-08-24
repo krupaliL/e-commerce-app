@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
+import '../../models/product_model.dart';
+
 class FavouriteScreen extends StatelessWidget {
   const FavouriteScreen({super.key});
 
@@ -27,7 +29,7 @@ class FavouriteScreen extends StatelessWidget {
           child:
             TGridLayout(
               itemCount: 6,
-              itemBuilder: (_, index) => const TProductCardVertical()),
+              itemBuilder: (_, index) => TProductCardVertical(product: ProductModel.empty())),
         ),
       ),
     );

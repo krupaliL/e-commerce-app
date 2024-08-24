@@ -4,7 +4,6 @@ import 'package:e_commerce_app/features/shop/screens/home/widgets/home_appbar.da
 import 'package:e_commerce_app/features/shop/screens/home/widgets/home_categories.dart';
 import 'package:e_commerce_app/features/shop/screens/home/widgets/promo_slider.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
-import 'package:e_commerce_app/utils/constants/image_strings.dart';
 import 'package:e_commerce_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,13 +11,16 @@ import 'package:get/get.dart';
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/layouts/grid_layout.dart';
+import '../../../../common/widgets/shimmers/vertical_product_shimmer.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
+import '../../controllers/product_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -65,11 +67,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   /// Promo Slider
-                  const TPromoSlider(banners: [
-                    TImages.promoBanner1,
-                    TImages.promoBanner2,
-                    TImages.promoBanner3
-                  ],),
+                  const TPromoSlider(),
                   const SizedBox(height: TSizes.spaceBtwSections),
 
                   /// -- Heading
@@ -77,7 +75,17 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: TSizes.spaceBtwItems),
 
                   /// Popular Products
-                  TGridLayout(itemCount: 2, itemBuilder: (_, index) => const TProductCardVertical()),
+                  Obx(() {
+                    if (controller.isLoading.value) return const TVerticalProductShimmer();
+
+                    if(controller.featuresProducts.isEmpty) {
+                      return Center(child: Text('No Data Found!', style: Theme.of(context).textTheme.bodyMedium));
+                    }
+                    return TGridLayout(
+                      itemCount: controller.featuresProducts.length,
+                      itemBuilder: (_, index) => TProductCardVertical(product: controller.featuresProducts[index]),
+                    );
+                  }),
                 ],
               ),
             ),
