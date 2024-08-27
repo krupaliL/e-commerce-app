@@ -5,6 +5,7 @@ import 'package:e_commerce_app/features/shop/screens/product_details/widgets/pro
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/product_detail_image_slider.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/product_meta_data.dart';
 import 'package:e_commerce_app/features/shop/screens/product_details/widgets/rating_share_widget.dart';
+import 'package:e_commerce_app/utils/constants/enums.dart';
 import 'package:e_commerce_app/utils/constants/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -26,7 +27,7 @@ class ProductDetailScreen extends StatelessWidget {
         child: Column(
           children: [
             /// 1 - Product Image Slider
-            const TProductImageSlider(),
+            TProductImageSlider(product: product),
 
             /// 2 - Product Details
             Padding(
@@ -37,11 +38,13 @@ class ProductDetailScreen extends StatelessWidget {
                   const TRatingAndSharing(),
 
                   /// -- Price, Title, Stack & Brand
-                  const TProductMetaData(),
+                  TProductMetaData(product: product),
 
                   /// -- Attributes
-                  const TProductAttributes(),
-                  const SizedBox(height: TSizes.spaceBtwSections),
+                  // TProductAttributes(product: product),
+                  if(product.productType == ProductType.variable.toString()) TProductAttributes(product: product),
+                  // const SizedBox(height: TSizes.spaceBtwSections),
+                  if(product.productType == ProductType.variable.toString()) const SizedBox(height: TSizes.spaceBtwSections),
 
                   /// -- Checkout Button
                   SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () {}, child: const Text('Checkout'))),
@@ -50,14 +53,14 @@ class ProductDetailScreen extends StatelessWidget {
                   /// -- Description
                   const TSectionHeading(title: 'Description', showActionButton: false),
                   const SizedBox(height: TSizes.spaceBtwItems),
-                  const ReadMoreText(
-                    'Elevate your game with Nike’s latest shoes, engineered for peak performance and unmatched comfort. Featuring a sleek, modern design and advanced cushioning technology, these sneakers offer superior support whether you are hitting the gym or the streets.',
+                  ReadMoreText(
+                    product.description ?? '',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: ' Show more',
-                    trimExpandedText: ' Less',
-                    moreStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                    lessStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    trimExpandedText: 'Show Less',
+                    moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                   ),
 
                   /// -- Reviews
