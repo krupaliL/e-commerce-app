@@ -16,8 +16,8 @@ class ProductAttributeModel {
     if (data.isEmpty) return ProductAttributeModel();
 
     return ProductAttributeModel(
-      name: data.containsKey('Name') ? data['Name'] : '',
-      values: List<String>.from(data['Values']),
+      name: data['Name'] ?? '',
+      values: data['Values'] != null ? List<String>.from(data['Values']) : [],
     );
   }
 }

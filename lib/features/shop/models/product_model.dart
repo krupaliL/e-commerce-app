@@ -55,20 +55,20 @@ class ProductModel {
       'Price': price,
       'Images': images ?? [],
       'Thumbnail': thumbnail,
-      'salePrice': salePrice,
-      'isFeatured': isFeatured,
-      'categoryId': categoryId,
-      'brand': brand!.toJson(),
-      'description': description,
-      'productType': productType,
-      'productAttributes': productAttributes != null ? productAttributes!.map((e) => e.toJson()).toList() : [],
-      'productVariations': productVariations !=  null ? productVariations!.map((e) => e.toJson()).toList() : [],
+      'SalePrice': salePrice,
+      'IsFeatured': isFeatured,
+      'CategoryId': categoryId,
+      'Brand': brand!.toJson(),
+      'Description': description,
+      'ProductType': productType,
+      'ProductAttributes': productAttributes != null ? productAttributes!.map((e) => e.toJson()).toList() : [],
+      'ProductVariations': productVariations !=  null ? productVariations!.map((e) => e.toJson()).toList() : [],
     };
   }
 
   // Map Json oriented document snapshot from Firebase to Model
   factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
-    log("${document.data()}", name: "productData");
+    // log("${document.data()}", name: "productData");
     if(document.data() == null) return ProductModel.empty();
     final data = document.data()!;
     return ProductModel(
@@ -83,10 +83,18 @@ class ProductModel {
       categoryId: data['CategoryId'] ?? '',
       description: data['Description'] ?? '',
       productType: data['ProductType'] ?? '',
-      brand: BrandModel.fromJson(data['Brand']),
+      brand: data['Brand'] != null ? BrandModel.fromJson(data['Brand']) : BrandModel.empty(),
       images: data['Images'] != null ? List<String>.from(data['Images']) : [],
-      productAttributes: data['ProductAttributes'] != null ? (data['ProductAttributes'] as List<dynamic>).map((e) => ProductAttributeModel.fromJson(e)).toList() : [],
-      productVariations: data['ProductVariations'] != null ? (data['ProductVariations'] as List<dynamic>).map((e) => ProductVariationModel.fromJson(e)).toList() : [],
+      productAttributes: data['ProductAttributes'] != null
+          ? (data['ProductAttributes'] is List
+              ? (data['ProductAttributes'] as List<dynamic>).map((e) => ProductAttributeModel.fromJson(e)).toList()
+              : [ProductAttributeModel.fromJson(data['ProductAttributes'])])
+          : [],
+      productVariations: data['ProductVariations'] != null
+          ? (data['ProductVariations'] is List
+              ? (data['ProductVariations'] as List<dynamic>).map((e) => ProductVariationModel.fromJson(e)).toList()
+              : [ProductVariationModel.fromJson(data['ProductVariations'])])
+          : [],
     );
   }
 }
