@@ -29,7 +29,7 @@ class TProductAttributes extends StatelessWidget {
           // Display variation price and stock when some variation is selected.
           if (controller.selectedVariation.value.id.isNotEmpty)
           TRoundedContainer(
-            padding: const EdgeInsets.all(TSizes.md),
+            padding: const EdgeInsets.all(TSizes.sm + 5),
             backgroundColor: dark ? TColors.darkerGrey : TColors.grey,
             child: Column(
               children: [
@@ -66,16 +66,16 @@ class TProductAttributes extends StatelessWidget {
                             Text(controller.variationStockStatus.value, style: Theme.of(context).textTheme.titleMedium),
                           ],
                         ),
+
+                        /// Variation Description
+                        TProductTitleText(
+                          title: controller.selectedVariation.value.description ?? '',
+                          smallSize: true,
+                          maxLines: 4,
+                        ),
                       ],
                     ),
                   ],
-                ),
-
-                /// Variation Description
-                TProductTitleText(
-                  title: controller.selectedVariation.value.description ?? '',
-                  smallSize: true,
-                  maxLines: 4,
                 ),
               ],
             ),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:e_commerce_app/features/shop/models/product_model.dart';
 import 'package:e_commerce_app/utils/constants/enums.dart';
 import 'package:e_commerce_app/utils/popups/loaders.dart';
@@ -32,10 +30,20 @@ class ProductController extends GetxController {
       featuresProducts.assignAll(products);
 
     } catch (e) {
-      log(e.toString(), name: 'FetchFeaturedProducts');
       TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
     } finally {
       isLoading.value = false;
+    }
+  }
+
+  Future<List<ProductModel>> fetchAllFeaturedProducts() async {
+    try {
+      // Fetch Products
+      final products = await productRepository.getFeaturedProducts();
+      return products;
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      return [];
     }
   }
 

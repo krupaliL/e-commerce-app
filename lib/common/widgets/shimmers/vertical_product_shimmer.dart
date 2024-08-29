@@ -20,11 +20,11 @@ class TVerticalProductShimmer extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image
+            /// Image
             TShimmerEffect(width: 180, height: 180),
             SizedBox(height: TSizes.spaceBtwItems),
 
-            // Text
+            /// Text
             // TShimmerEffect(width: 160, height: 160),
             // SizedBox(height: TSizes.spaceBtwItems),
             TShimmerEffect(width: 110, height: 15),
