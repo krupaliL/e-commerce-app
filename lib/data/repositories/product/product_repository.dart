@@ -42,7 +42,7 @@ class ProductRepository extends GetxController {
     }
   }
 
-  Future<List<ProductModel>> getProductForBrand({ required String brandId, int limit = -1}) async {
+  Future<List<ProductModel>> getProductsForBrand({ required String brandId, int limit = -1}) async {
     try {
       final querySnapshot = limit == -1
           ? await _db.collection('Products').where('Brand.Id', isEqualTo: brandId).get()
@@ -57,6 +57,33 @@ class ProductRepository extends GetxController {
       throw e.toString();
     } catch (e) {
       log(e.toString(), name: 'getProductForBrand');
+      throw 'Something went wrong. Please try again';
+    }
+  }
+
+  Future<List<ProductModel>> getProductsForCategory({ required String categoryId, int limit = -1}) async {
+    try {
+      // Query to get all documents where productId matches the provided categoryId & Fetch limited or unlimited based on limit
+      QuerySnapshot productCategoryQuery = limit == -1
+          ? await _db.collection('ProductCategory').where('categoryId', isEqualTo: categoryId).get()
+          : await _db.collection('ProductCategory').where('categoryId', isEqualTo: categoryId).limit(limit).get();
+
+      // Extract productIds form the documents
+      List<String> productIds = productCategoryQuery.docs.map((doc) => doc['productId'] as String).toList();
+
+      // Query to get all document where the brandId is in the list of bandIds, FieldPath.documentId to query documents in Collection
+      final productQuery = await _db.collection('Products').where(FieldPath.documentId, whereIn: productIds).get();
+
+      // Extract brand names or other relevant data from the documents
+      List<ProductModel> products = productQuery.docs.map((doc) => ProductModel.fromSnapshot(doc)).toList();
+
+      return products;
+    } on FirebaseException catch (e) {
+      throw e.toString();
+    } on PlatformException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      log(e.toString(), name: 'getProductsForCategory');
       throw 'Something went wrong. Please try again';
     }
   }
