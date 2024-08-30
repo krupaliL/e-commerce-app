@@ -77,7 +77,7 @@ class ProductRepository extends GetxController {
     }
   }
 
-  Future<List<ProductModel>> getProductsForCategory({ required String categoryId, int limit = -1}) async {
+  Future<List<ProductModel>> getProductsForCategory({ required String categoryId, int limit = 4}) async {
     try {
       // Query to get all documents where productId matches the provided categoryId & Fetch limited or unlimited based on limit
       QuerySnapshot productCategoryQuery = limit == -1

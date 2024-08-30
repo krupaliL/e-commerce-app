@@ -38,14 +38,14 @@ class FavouriteScreen extends StatelessWidget {
                   /// Nothing Found Widget
                   final emptyWidget = TAnimationLoaderWidget(
                     text: 'Ooops! Wishlist is empty...',
-                    animation: TImages.animalIcon,
+                    animation: TImages.doctorAnimation,
                     showAction: true,
                     actionText: 'Let\'s add some',
                     onActionPressed: () => Get.off(() => const NavigationMenu()),
                   );
 
                   const loader = TVerticalProductShimmer(itemCount: 6);
-                  final widget = TCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader);
+                  final widget = TCloudHelperFunctions.checkMultiRecordState(snapshot: snapshot, loader: loader, nothingFound: emptyWidget);
                   if (widget != null) return widget;
 
                   final products = snapshot.data!;
