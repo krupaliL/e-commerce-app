@@ -13,6 +13,7 @@ class ProductRepository extends GetxController {
   /// Firestore instance for database interactions.
   final _db = FirebaseFirestore.instance;
 
+  /// Get all featured products
   Future<List<ProductModel>> getFeaturedProducts() async {
     try {
       final snapshot = await _db.collection('Products').where('IsFeatured', isEqualTo: true).get();
@@ -27,6 +28,7 @@ class ProductRepository extends GetxController {
     }
   }
 
+  /// Get Products based on the Query
   Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
     try {
       final querySnapshot = await query.get();
@@ -38,6 +40,20 @@ class ProductRepository extends GetxController {
       throw e.toString();
     } catch (e) {
       log(e.toString(), name: 'GetFeaturedProducts');
+      throw 'Something went wrong. Please try again';
+    }
+  }
+  /// Get Products based on the Query
+  Future<List<ProductModel>> getFavoriteProducts(List<String> productIds) async {
+    try {
+      final snapshot = await _db.collection('Products').where(FieldPath.documentId, whereIn: productIds).get();
+      return snapshot.docs.map((querySnapshot) => ProductModel.fromSnapshot(querySnapshot)).toList();
+    } on FirebaseException catch (e) {
+      throw e.toString();
+    } on PlatformException catch (e) {
+      throw e.toString();
+    } catch (e) {
+      log(e.toString(), name: 'getFavoriteProducts');
       throw 'Something went wrong. Please try again';
     }
   }

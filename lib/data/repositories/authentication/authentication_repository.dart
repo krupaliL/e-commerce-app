@@ -5,6 +5,7 @@ import 'package:e_commerce_app/features/authentication/screens/login/login.dart'
 import 'package:e_commerce_app/features/authentication/screens/onboarding/onboarding.dart';
 import 'package:e_commerce_app/features/authentication/screens/signup/verify_email.dart';
 import 'package:e_commerce_app/navigation_menu.dart';
+import 'package:e_commerce_app/utils/local_storage/storage_utility.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
@@ -39,6 +40,10 @@ class AuthenticationRepository extends GetxController {
     if(user != null){
       // If the user is logged in
       if(user.emailVerified){
+
+        // Initialize User Specific Storage
+        await TLocalStorage.init(user.uid);
+
         // If the user's email is verified, navigate to the main Navigation Menu
         Get.offAll(() => const NavigationMenu());
       } else{

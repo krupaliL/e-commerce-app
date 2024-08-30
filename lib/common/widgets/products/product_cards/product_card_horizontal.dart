@@ -10,7 +10,7 @@ import 'package:iconsax/iconsax.dart';
 
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
-import '../../icons/t_circular_icon.dart';
+import '../favorite_icon/favorite_icon.dart';
 
 class TProductCardHorizontal extends StatelessWidget {
   const TProductCardHorizontal({super.key});
@@ -57,7 +57,7 @@ class TProductCardHorizontal extends StatelessWidget {
                 const Positioned(
                   top: 0,
                   right: 0,
-                  child: TCircularIcon(icon: Iconsax.heart5, color: Colors.red,),
+                  child: TFavoriteIcon(productId: ''),
                 ),
               ],
             ),
