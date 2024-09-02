@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
 import 'package:e_commerce_app/common/widgets/images/t_rounded_image.dart';
 import 'package:e_commerce_app/common/widgets/products/product_cards/product_card_horizontal.dart';
