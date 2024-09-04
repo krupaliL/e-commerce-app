@@ -31,7 +31,7 @@ class StoreScreen extends StatelessWidget {
         /// -- Appbar
         appBar: TAppBar(
           title: Text('Store', style: Theme.of(context).textTheme.headlineMedium),
-          actions: [TCartCounterIcon(onPressed: () {})],
+          actions: const [TCartCounterIcon()],
         ),
         body: NestedScrollView(
           headerSliverBuilder: (_, innerBoxIsScrolled) {
