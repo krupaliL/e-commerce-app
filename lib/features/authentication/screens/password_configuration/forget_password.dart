@@ -1,6 +1,5 @@
 import 'package:e_commerce_app/common/widgets/appbar/appbar.dart';
 import 'package:e_commerce_app/features/authentication/controllers/forget_password/forget_password_controller.dart';
-import 'package:e_commerce_app/features/authentication/screens/password_configuration/reset_password.dart';
 import 'package:e_commerce_app/utils/constants/sizes.dart';
 import 'package:e_commerce_app/utils/constants/text_strings.dart';
 import 'package:e_commerce_app/utils/validators/validation.dart';
