@@ -25,7 +25,7 @@ class CategoryController extends GetxController {
       // Show loader while loading categories
       isLoading.value = true;
 
-      // Fetch categories from data source (Firestore, API, etc.
+      // Fetch categories from data source (Firestore, API, etc.)
       final categories = await _categoryRepository.getAllCategories();
 
       // Update the categories list
