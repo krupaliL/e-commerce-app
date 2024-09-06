@@ -83,7 +83,7 @@ class AddressModel {
             ? (data['DateTime'] as Timestamp).toDate()
             : DateTime.parse(data['DateTime']))
           : null,
-      selectedAddress: data['selectedAddress'] != null ? (data['selectedAddress'] as bool) : false,
+      selectedAddress: data['SelectedAddress'] != null ? (data['SelectedAddress'] as bool) : false,
     );
   }
 

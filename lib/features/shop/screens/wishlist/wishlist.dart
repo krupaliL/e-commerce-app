@@ -38,7 +38,7 @@ class FavouriteScreen extends StatelessWidget {
                   /// Nothing Found Widget
                   final emptyWidget = TAnimationLoaderWidget(
                     text: 'Ooops! Wishlist is empty...',
-                    animation: TImages.doctorAnimation,
+                    animation: TImages.emptyBegAnimation,
                     showAction: true,
                     actionText: 'Let\'s add some',
                     onActionPressed: () => Get.off(() => const NavigationMenu()),

@@ -4,6 +4,7 @@ import 'package:e_commerce_app/features/shop/models/product_model.dart';
 import 'package:e_commerce_app/utils/constants/colors.dart';
 import 'package:e_commerce_app/utils/constants/sizes.dart';
 import 'package:e_commerce_app/utils/helpers/helper_functions.dart';
+import 'package:e_commerce_app/utils/popups/loaders.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -57,7 +58,14 @@ class TBottomAddToCart extends StatelessWidget {
             ),
           ),
           ElevatedButton(
-            onPressed: controller.productQuantityInCart.value < 1 ? null : () => controller.addToCart(product),
+            onPressed: () {
+              if (controller.productQuantityInCart.value < 1) {
+                TLoaders.customToast(message: 'Select Quantity');
+              } else {
+                controller.addToCart(product);
+              }
+            },
+            // onPressed: controller.productQuantityInCart.value < 1 ? null : () => controller.addToCart(product),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(TSizes.md),
               backgroundColor: TColors.black,

@@ -177,7 +177,7 @@ class CartController extends GetxController {
   }
 
   void loadCartItems() {
-    final cartItemStrings = TLocalStorage.instance().readData<List<dynamic>>('cartItem');
+    final cartItemStrings = TLocalStorage.instance().readData<List<dynamic>>('cartItems');
     if (cartItemStrings != null) {
       cartItems.assignAll(cartItemStrings.map((item) => CartItemModel.fromJson(item as Map<String,dynamic>)));
       updateCartTotals();

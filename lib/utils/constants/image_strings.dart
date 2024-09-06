@@ -66,4 +66,5 @@ class TImages {
   // -- Lottie Animation
   static const String doctorAnimation = "assets/images/animations/doctor-animation.json";
   static const String successfullyRegisterAnimation = "assets/images/animations/successful-animation.json";
+  static const String emptyBegAnimation = "assets/images/animations/empty-beg-animation.json";
 }

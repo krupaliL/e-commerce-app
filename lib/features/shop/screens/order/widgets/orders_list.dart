@@ -25,7 +25,7 @@ class TOrderListItems extends StatelessWidget {
         /// Nothing Found Widget
         final emptyWidget = TAnimationLoaderWidget(
           text: 'Ooops! No OrdersYet!',
-          animation: TImages.doctorAnimation,
+          animation: TImages.emptyBegAnimation,
           showAction: true,
           actionText: 'Let\'s fill it',
           onActionPressed: () => Get.off(() => const NavigationMenu()),

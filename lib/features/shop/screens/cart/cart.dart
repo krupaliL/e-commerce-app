@@ -23,7 +23,7 @@ class CartScreen extends StatelessWidget {
 
           final emptyWidget = TAnimationLoaderWidget(
             text: 'Ooops! Cart is EMPTY.',
-            animation: TImages.doctorAnimation,
+            animation: TImages.emptyBegAnimation,
             showAction: true,
             actionText: 'Let\'s fill it',
             onActionPressed: () => Get.off(() => const NavigationMenu()),
